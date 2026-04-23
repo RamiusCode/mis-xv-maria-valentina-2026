@@ -1,0 +1,171 @@
+---
+// Fecha.astro
+---
+
+<section class="relative py-10 px-4 overflow-hidden">
+    <div class="max-w-sm mx-auto text-center">
+        <!-- Separador arriba -->
+        <!-- <div class="flex justify-center mb-8" id="flores-fecha">
+            <img
+                src="/imagenes/separa.png"
+                alt=""
+                class="w-44 md:w-52 h-auto object-contain"
+            />
+        </div> -->
+
+        <!-- Texto invitación -->
+        <div class="mb-8" id="texto-invitacion">
+            <p
+                class="font-charm text-2xl sm:text-3xl text-[#C9A94B] leading-tight"
+            >
+                Te invito a celebrar el día
+            </p>
+        </div>
+
+        <!-- Fecha -->
+        <div id="fecha-evento">
+            <!-- Línea decorativa superior -->
+            <div class="flex items-center gap-3 mb-5">
+                <div class="flex-1 h-px bg-[#C9A94B] opacity-40"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#C9A94B] opacity-50">
+                </div>
+                <div class="flex-1 h-px bg-[#C9A94B] opacity-40"></div>
+            </div>
+
+            <!-- DÍA · NÚMERO · MES -->
+            <div class="flex items-center justify-center gap-4">
+                <!-- SÁBADO -->
+                <div class="flex flex-col items-center gap-2 flex-1">
+                    <span
+                        class="font-crimson uppercase text-[#e8a0b0] text-lg sm:text-xl md:text-2xl font-semibold tracking-widest leading-none"
+                    >
+                        Sábado
+                    </span>
+                    <div class="w-10 h-px bg-[#e8a0b0] opacity-50"></div>
+                </div>
+
+                <!-- Número -->
+                <span
+                    class="font-charm text-5xl sm:text-6xl text-[#C9A94B] leading-none font-bold flex-shrink-0"
+                >
+                    23
+                </span>
+
+                <!-- FEBRERO -->
+                <div class="flex flex-col items-center gap-2 flex-1">
+                    <span
+                        class="font-crimson uppercase text-[#e8a0b0] text-lg sm:text-xl md:text-2xl font-semibold tracking-widest leading-none"
+                    >
+                        Mayo
+                    </span>
+                    <div class="w-10 h-px bg-[#e8a0b0] opacity-50"></div>
+                </div>
+            </div>
+
+            <!-- Año -->
+            <div class="mt-4" id="anio-evento">
+                <span
+                    class="font-crimson text-xl sm:text-2xl tracking-[0.5em] text-[#C9A94B] font-semibold"
+                >
+                    2026
+                </span>
+            </div>
+
+            <!-- Línea decorativa inferior -->
+            <div class="flex items-center gap-3 mt-5">
+                <div class="flex-1 h-px bg-[#C9A94B] opacity-40"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#C9A94B] opacity-50">
+                </div>
+                <div class="flex-1 h-px bg-[#C9A94B] opacity-40"></div>
+            </div>
+        </div>
+
+        <!-- Separador abajo -->
+        <!-- <div class="flex justify-center mt-8">
+            <img
+                src="/imagenes/separa.png"
+                alt=""
+                class="w-44 md:w-52 h-auto object-contain"
+                style="transform: scaleY(-1);"
+            />
+        </div> -->
+    </div>
+
+    <!-- Flor derecha abajo -->
+    <img
+        src="/imagenes/florizquierdo.png"
+        alt=""
+        class="absolute right-0 bottom-0 w-20 sm:w-24 md:w-28 h-auto object-contain pointer-events-none select-none"
+        style="transform: scaleX(-1);"
+    />
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (typeof window !== "undefined") {
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.set("#flores-fecha", { opacity: 0, scale: 0.85 });
+            gsap.set("#texto-invitacion", { opacity: 0, y: 15 });
+            gsap.set("#fecha-evento", { opacity: 0, y: 15 });
+            gsap.set("#anio-evento", { opacity: 0, y: 10 });
+
+            ScrollTrigger.create({
+                trigger: "#flores-fecha",
+                start: "top 85%",
+                onEnter: () => {
+                    const tl = gsap.timeline();
+                    tl.to("#flores-fecha", {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.8,
+                        ease: "power2.out",
+                    })
+                        .to(
+                            "#texto-invitacion",
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                ease: "power2.out",
+                            },
+                            "-=0.3",
+                        )
+                        .to(
+                            "#fecha-evento",
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                ease: "power2.out",
+                            },
+                            "-=0.4",
+                        )
+                        .to(
+                            "#anio-evento",
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.6,
+                                ease: "power2.out",
+                            },
+                            "-=0.3",
+                        );
+                },
+                onLeaveBack: () => {
+                    gsap.to(
+                        "#flores-fecha, #texto-invitacion, #fecha-evento, #anio-evento",
+                        {
+                            opacity: 0,
+                            duration: 0.4,
+                            ease: "power2.in",
+                        },
+                    );
+                },
+            });
+        });
+    }
+</script>

@@ -1,0 +1,102 @@
+---
+// Calendario.astro
+---
+
+<section class="py-6 px-6">
+    <div class="w-56 mx-auto text-center">
+
+        <!-- Título del mes -->
+        <div class="mb-4" id="titulo-mes-container">
+            <h3 class="font-charm text-xl text-[#C9A94B]" id="nombre-mes"></h3>
+            <div class="flex items-center gap-2 mt-2">
+                <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
+                <div class="w-1 h-1 rounded-full bg-[#C9A94B] opacity-40"></div>
+                <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
+            </div>
+        </div>
+
+        <!-- Días de la semana -->
+        <div class="grid grid-cols-7 gap-0.5 mb-1">
+            {["D","L","M","M","J","V","S"].map(d => (
+                <div class="text-center font-crimson uppercase text-[#e8a0b0] text-xs font-semibold tracking-wide">{d}</div>
+            ))}
+        </div>
+
+        <!-- Días del mes -->
+        <div class="grid grid-cols-7 gap-0.5" id="dias-container"></div>
+
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const DIA_ESPECIAL = 23;
+    const MES_ESPECIAL = 5;
+    const AÑO_ESPECIAL = 2026;
+
+    const NOMBRES_MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+    function generarCalendario() {
+        const mesEl = document.getElementById("nombre-mes");
+        if (mesEl) mesEl.textContent = `${NOMBRES_MESES[MES_ESPECIAL - 1]} ${AÑO_ESPECIAL}`;
+
+        const primerDia = new Date(AÑO_ESPECIAL, MES_ESPECIAL - 1, 1).getDay();
+        const ultimoDia = new Date(AÑO_ESPECIAL, MES_ESPECIAL, 0).getDate();
+        const container = document.getElementById("dias-container");
+        if (!container) return;
+        container.innerHTML = "";
+
+        for (let i = 0; i < primerDia; i++) {
+            container.appendChild(document.createElement("div"));
+        }
+
+        for (let dia = 1; dia <= ultimoDia; dia++) {
+            const div = document.createElement("div");
+            if (dia === DIA_ESPECIAL) {
+                div.className = "dia-calendario aspect-square flex items-center justify-center rounded-xl";
+                div.id = "dia-especial";
+                div.style.cssText = "background: rgba(201,169,75,0.15); border: 1.5px solid rgba(201,169,75,0.5);";
+                div.innerHTML = `<span class="font-cormorant text-sm font-semibold text-[#C9A94B]">${dia}</span>`;
+            } else {
+                div.className = "dia-calendario aspect-square flex items-center justify-center";
+                div.innerHTML = `<span class="font-cormorant text-sm text-gray-400 font-light">${dia}</span>`;
+            }
+            container.appendChild(div);
+        }
+    }
+
+    if (typeof window !== "undefined") {
+        document.addEventListener("DOMContentLoaded", () => {
+            generarCalendario();
+
+            gsap.set("#titulo-mes-container", { opacity: 0, y: -15 });
+            gsap.set("#dias-container", { opacity: 0, y: 15 });
+
+            ScrollTrigger.create({
+                trigger: "#titulo-mes-container",
+                start: "top 85%",
+                onEnter: () => {
+                    gsap.to("#titulo-mes-container", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" });
+                    gsap.to("#dias-container", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", delay: 0.2 });
+                },
+                onLeaveBack: () => {
+                    gsap.set("#titulo-mes-container", { opacity: 0, y: -15 });
+                    gsap.set("#dias-container", { opacity: 0, y: 15 });
+                },
+            });
+
+            gsap.to("#dia-especial", {
+                scale: 1.05,
+                duration: 2.5,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: -1,
+                delay: 1,
+            });
+        });
+    }
+</script>

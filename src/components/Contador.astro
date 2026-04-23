@@ -1,0 +1,171 @@
+---
+// Contador.astro
+---
+
+<section class="relative py-10 px-6 overflow-hidden">
+    <div class="max-w-xs mx-auto text-center">
+        <!-- Título -->
+        <div class="mb-6" id="titulo-contador">
+            <p class="font-charm text-2xl sm:text-3xl text-[#C9A94B]">Faltan</p>
+            <p class="font-crimson uppercase text-[#e8a0b0] text-xl mt-1">
+                Para el gran día
+            </p>
+        </div>
+
+        <!-- Línea superior -->
+        <div class="flex items-center gap-2 mb-6">
+            <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
+            <div class="w-1 h-1 rounded-full bg-[#C9A94B] opacity-40"></div>
+            <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
+        </div>
+
+        <!-- Contador -->
+        <div
+            id="contador-container"
+            class="flex items-center justify-center gap-3 sm:gap-5 rounded-2xl px-5 py-5"
+            style="
+                background: rgba(255, 255, 255, 0.35);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(201, 169, 75, 0.25);
+                box-shadow: 0 4px 24px rgba(201, 169, 75, 0.1), inset 0 1px 0 rgba(255,255,255,0.6);
+            "
+        >
+            <!-- DÍAS -->
+            <div class="flex flex-col items-center gap-1">
+                <span
+                    class="font-cormorant text-4xl sm:text-5xl font-light text-[#C9A94B] leading-none tracking-wide"
+                    id="dias">00</span
+                >
+                <span
+                    class="font-crimson uppercase text-[#e8a0b0] text-base sm:text-lg tracking-[0.15em]"
+                    >días</span
+                >
+            </div>
+
+            <span class="text-[#C9A94B] opacity-30 text-lg mb-4">|</span>
+
+            <!-- HORAS -->
+            <div class="flex flex-col items-center gap-1">
+                <span
+                    class="font-cormorant text-4xl sm:text-5xl font-light text-[#C9A94B] leading-none tracking-wide"
+                    id="horas">00</span
+                >
+                <span
+                    class="font-crimson uppercase text-[#e8a0b0] text-base sm:text-lg tracking-[0.15em]"
+                    >horas</span
+                >
+            </div>
+
+            <span class="text-[#C9A94B] opacity-30 text-lg mb-4">|</span>
+
+            <!-- MINUTOS -->
+            <div class="flex flex-col items-center gap-1">
+                <span
+                    class="font-cormorant text-4xl sm:text-5xl font-light text-[#C9A94B] leading-none tracking-wide"
+                    id="minutos">00</span
+                >
+                <span
+                    class="font-crimson uppercase text-[#e8a0b0] text-base sm:text-lg tracking-[0.15em]"
+                    >min</span
+                >
+            </div>
+
+            <span class="text-[#C9A94B] opacity-30 text-lg mb-4">|</span>
+
+            <!-- SEGUNDOS -->
+            <div class="flex flex-col items-center gap-1">
+                <span
+                    class="font-cormorant text-4xl sm:text-5xl font-light text-[#C9A94B] leading-none tracking-wide"
+                    id="segundos">00</span
+                >
+                <span
+                    class="font-crimson uppercase text-[#e8a0b0] text-base sm:text-lg tracking-[0.15em]"
+                    >seg</span
+                >
+            </div>
+        </div>
+
+        <!-- Línea inferior -->
+        <div class="flex items-center gap-2 mt-6">
+            <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
+            <div class="w-1 h-1 rounded-full bg-[#C9A94B] opacity-40"></div>
+            <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== "undefined") {
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.set("#titulo-contador", { opacity: 0, y: -15 });
+            gsap.set("#contador-container", { opacity: 0, scale: 0.95, y: 20 });
+            ScrollTrigger.create({
+                trigger: "#titulo-contador",
+                start: "top 88%",
+                onEnter: () => {
+                    const tl = gsap.timeline();
+                    tl.to("#titulo-contador",    { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
+                      .to("#contador-container", { opacity: 1, scale: 1, y: 0, duration: 1.1, ease: "power2.out" }, "<0.1");
+                },
+                onLeaveBack: () => {
+                    gsap.set("#titulo-contador",    { opacity: 0, y: -15 });
+                    gsap.set("#contador-container", { opacity: 0, scale: 0.95, y: 20 });
+                },
+            });
+        });
+    }
+</script>
+
+<script>
+    if (typeof window !== "undefined") {
+        document.addEventListener("DOMContentLoaded", () => {
+            const fechaEvento = new Date("2026-05-23T19:00:00").getTime();
+
+            function actualizarContador() {
+                const diferencia = fechaEvento - new Date().getTime();
+
+                const dias =
+                    diferencia > 0
+                        ? Math.floor(diferencia / (1000 * 60 * 60 * 24))
+                        : 0;
+                const horas =
+                    diferencia > 0
+                        ? Math.floor(
+                              (diferencia % (1000 * 60 * 60 * 24)) /
+                                  (1000 * 60 * 60),
+                          )
+                        : 0;
+                const minutos =
+                    diferencia > 0
+                        ? Math.floor(
+                              (diferencia % (1000 * 60 * 60)) / (1000 * 60),
+                          )
+                        : 0;
+                const segundos =
+                    diferencia > 0
+                        ? Math.floor((diferencia % (1000 * 60)) / 1000)
+                        : 0;
+
+                document.getElementById("dias")!.textContent = String(
+                    dias,
+                ).padStart(2, "0");
+                document.getElementById("horas")!.textContent = String(
+                    horas,
+                ).padStart(2, "0");
+                document.getElementById("minutos")!.textContent = String(
+                    minutos,
+                ).padStart(2, "0");
+                document.getElementById("segundos")!.textContent = String(
+                    segundos,
+                ).padStart(2, "0");
+            }
+
+            actualizarContador();
+            setInterval(actualizarContador, 1000);
+        });
+    }
+</script>

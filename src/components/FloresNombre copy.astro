@@ -1,0 +1,131 @@
+---
+// HeroXV.astro - Sección principal Mis XV Años
+// Solo Tailwind, sin animaciones, imágenes .png
+---
+
+<section
+    class="relative w-full overflow-x-hidden flex flex-col items-center"
+    style="position: relative;"
+>
+    <!-- FLORES ARRIBA (imagen completa de ancho) -->
+    <div class="relative w-full">
+        <img
+            src="/imagenes/arribaflores.png"
+            alt="Flores decorativas arriba"
+            class="w-full h-auto object-cover block"
+        />
+    </div>
+
+    <!-- CONTENIDO CENTRAL -->
+    <div
+        class="relative z-10 flex flex-col items-center w-full -mt-16 sm:-mt-20 md:-mt-24"
+    >
+        <!-- CORONA -->
+        <div class="-mt-8 sm:-mt-10 mb-2 sm:mb-3">
+            <img
+                src="/imagenes/corona.png"
+                alt="Corona de quinceañera"
+                class="w-32 h-auto sm:w-40 md:w-48 lg:w-56 object-contain mx-auto"
+            />
+        </div>
+
+        <!-- NOMBRE -->
+        <div class="mt-10 sm:mt-14 mb-4 sm:mb-5">
+            <h1
+                class="font-great-vibes text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#C9A94B] leading-tight tracking-wide text-center"
+            >
+                Maria Velentina
+            </h1>
+        </div>
+
+        <!-- IMAGEN QUINCEAÑERA -->
+        <div class="w-full">
+            <img
+                src="/imagenes/quince.png"
+                alt="Quinceañera"
+                class="w-[78%] h-auto object-cover block"
+            />
+        </div>
+    </div>
+
+    <!-- MARIPOSAS VOLANDO -->
+    <div
+        class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden"
+    >
+        <!-- Mariposa grande - derecha, más arriba del grupo -->
+        <img
+            src="/imagenes/mariposa.png"
+            alt="Mariposa"
+            class="mariposa absolute w-14 sm:w-16"
+            style="top: 68%; right: 5%; animation: volar1 7s ease-in-out infinite;"
+        />
+        <!-- Mariposa mediana - derecha, medio del grupo -->
+        <img
+            src="/imagenes/mariposa.png"
+            alt="Mariposa"
+            class="mariposa absolute w-10 sm:w-12"
+            style="top: 77%; right: 10%; animation: volar3 8s ease-in-out infinite 3s;"
+        />
+        <!-- Mariposa pequeña - derecha, abajo del grupo -->
+        <img
+            src="/imagenes/mariposa.png"
+            alt="Mariposa"
+            class="mariposa absolute w-8 sm:w-10"
+            style="top: 85%; right: 4%; animation: volar2 9s ease-in-out infinite 1.5s;"
+        />
+    </div>
+</section>
+
+<style>
+    @keyframes volar1 {
+        0% {
+            transform: translate(0px, 0px) rotate(-5deg);
+        }
+        25% {
+            transform: translate(-10px, -14px) rotate(4deg);
+        }
+        50% {
+            transform: translate(6px, -22px) rotate(-3deg);
+        }
+        75% {
+            transform: translate(-8px, -10px) rotate(5deg);
+        }
+        100% {
+            transform: translate(0px, 0px) rotate(-5deg);
+        }
+    }
+    @keyframes volar2 {
+        0% {
+            transform: scaleX(-1) translate(0px, 0px) rotate(3deg);
+        }
+        25% {
+            transform: scaleX(-1) translate(8px, -18px) rotate(-4deg);
+        }
+        50% {
+            transform: scaleX(-1) translate(-5px, -28px) rotate(6deg);
+        }
+        75% {
+            transform: scaleX(-1) translate(10px, -12px) rotate(-3deg);
+        }
+        100% {
+            transform: scaleX(-1) translate(0px, 0px) rotate(3deg);
+        }
+    }
+    @keyframes volar3 {
+        0% {
+            transform: translate(0px, 0px) rotate(4deg);
+        }
+        30% {
+            transform: translate(-12px, -16px) rotate(-5deg);
+        }
+        60% {
+            transform: translate(8px, -24px) rotate(3deg);
+        }
+        80% {
+            transform: translate(-6px, -8px) rotate(-4deg);
+        }
+        100% {
+            transform: translate(0px, 0px) rotate(4deg);
+        }
+    }
+</style>
