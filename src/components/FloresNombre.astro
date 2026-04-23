@@ -41,7 +41,7 @@
         <!-- IMAGEN QUINCEAÑERA -->
         <div class="w-full" id="fn-quince">
             <img
-                src="/imagenes/quince.png"
+                src="/imagenes/quince.webp"
                 alt="Quinceañera"
                 class="w-[78%] h-auto object-cover block"
             />
@@ -136,37 +136,62 @@
 
     if (typeof window !== "undefined") {
         document.addEventListener("DOMContentLoaded", () => {
-
             // Estado inicial — todo invisible
-            gsap.set("#fn-flores",    { opacity: 0, y: -20 });
-            gsap.set("#fn-corona",    { opacity: 0, y: -15, scale: 0.92 });
-            gsap.set("#fn-nombre",    { opacity: 0, y: 20 });
-            gsap.set("#fn-quince",    { opacity: 0, y: 30 });
+            gsap.set("#fn-flores", { opacity: 0, y: -20 });
+            gsap.set("#fn-corona", { opacity: 0, y: -15, scale: 0.92 });
+            gsap.set("#fn-nombre", { opacity: 0, y: 20 });
+            gsap.set("#fn-quince", { opacity: 0, y: 30 });
             gsap.set("#fn-mariposas", { opacity: 0 });
 
             // Animación simultánea suave
             const tl = gsap.timeline({ delay: 0.2 });
 
             tl.to("#fn-flores", {
-                opacity: 1, y: 0,
-                duration: 1.2, ease: "power2.out"
-            })
-            .to("#fn-corona", {
-                opacity: 1, y: 0, scale: 1,
-                duration: 1.2, ease: "power2.out"
-            }, "<")
-            .to("#fn-nombre", {
-                opacity: 1, y: 0,
-                duration: 1.4, ease: "power2.out"
-            }, "<0.1")
-            .to("#fn-quince", {
-                opacity: 1, y: 0,
-                duration: 1.4, ease: "power2.out"
-            }, "<0.1")
-            .to("#fn-mariposas", {
                 opacity: 1,
-                duration: 1.6, ease: "sine.out"
-            }, "<0.3");
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out",
+            })
+                .to(
+                    "#fn-corona",
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1.2,
+                        ease: "power2.out",
+                    },
+                    "<",
+                )
+                .to(
+                    "#fn-nombre",
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.4,
+                        ease: "power2.out",
+                    },
+                    "<0.1",
+                )
+                .to(
+                    "#fn-quince",
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.4,
+                        ease: "power2.out",
+                    },
+                    "<0.1",
+                )
+                .to(
+                    "#fn-mariposas",
+                    {
+                        opacity: 1,
+                        duration: 1.6,
+                        ease: "sine.out",
+                    },
+                    "<0.3",
+                );
         });
     }
 </script>
