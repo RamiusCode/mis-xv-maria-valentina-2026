@@ -59,20 +59,55 @@
             Tu presencia y alegría hará que esta noche sea inolvidable.
         </p>
 
-        <!-- MARIPOSAS debajo del texto -->
-        <div class="relative w-full h-28 mt-4 pointer-events-none select-none">
-            <img src="/imagenes/mariposa.png" alt="" class="absolute w-8"
-                style="left: 10%; top: 10%; animation: volarA 7s ease-in-out infinite;" />
-            <img src="/imagenes/mariposa.png" alt="" class="absolute w-6"
-                style="left: 28%; top: 50%; animation: volarB 9s ease-in-out infinite 1.5s;" />
-            <img src="/imagenes/mariposa.png" alt="" class="absolute w-7"
-                style="left: 48%; top: 20%; animation: volarA 8s ease-in-out infinite 0.8s;" />
-            <img src="/imagenes/mariposa.png" alt="" class="absolute w-6"
-                style="right: 25%; top: 55%; animation: volarB 8s ease-in-out infinite 2s; transform: scaleX(-1);" />
-            <img src="/imagenes/mariposa.png" alt="" class="absolute w-8"
-                style="right: 8%; top: 15%; animation: volarA 9s ease-in-out infinite 3s; transform: scaleX(-1);" />
-        </div>
+        <div class="relative w-full flex justify-center mt-6">
+            <!-- Mariposas lado izquierdo -->
+            <img
+                src="/imagenes/mariposa.png"
+                alt=""
+                class="absolute w-10 pointer-events-none"
+                style="left: 8%; top: 10%; animation: volarA 7s ease-in-out infinite;"
+            />
+            <img
+                src="/imagenes/mariposa.png"
+                alt=""
+                class="absolute w-7 pointer-events-none"
+                style="left: 14%; top: 45%; animation: volarB 9s ease-in-out infinite 1.5s;"
+            />
+            <img
+                src="/imagenes/mariposa.png"
+                alt=""
+                class="absolute w-8 pointer-events-none"
+                style="left: 4%; top: 70%; animation: volarA 8s ease-in-out infinite 3s;"
+            />
 
+            <!-- Mariposas lado derecho -->
+            <img
+                src="/imagenes/mariposa.png"
+                alt=""
+                class="absolute w-9 pointer-events-none"
+                style="right: 10%; top: 15%; transform: scaleX(-1); animation: volarB 8s ease-in-out infinite 0.5s;"
+            />
+            <img
+                src="/imagenes/mariposa.png"
+                alt=""
+                class="absolute w-7 pointer-events-none"
+                style="right: 5%; top: 55%; transform: scaleX(-1); animation: volarA 9s ease-in-out infinite 2s;"
+            />
+            <img
+                src="/imagenes/mariposa.png"
+                alt=""
+                class="absolute w-10 pointer-events-none"
+                style="right: 15%; top: 75%; transform: scaleX(-1); animation: volarB 7s ease-in-out infinite 4s;"
+            />
+
+            <img
+                id="conf-per"
+                src="/imagenes/per.png"
+                alt=""
+                class="w-48 sm:w-56 h-auto object-contain block"
+                style="transform: translateY(40px);"
+            />
+        </div>
     </div>
 
     <!-- Flores pegadas al borde exterior de la sección -->
@@ -99,9 +134,11 @@
             gsap.set("#conf-flor", { opacity: 0, x: 50 });
             gsap.set("#conf-icon", { opacity: 0, scale: 0.8 });
             gsap.set("#conf-titulo", { opacity: 0, y: 20 });
+            gsap.set("#conf-texto", { opacity: 0, y: 16 });
             gsap.set("#conf-btn", { opacity: 0, y: 16 });
             gsap.set("#conf-linea", { opacity: 0, scaleX: 0.5 });
             gsap.set("#conf-final", { opacity: 0, y: 16 });
+            gsap.set("#conf-per", { opacity: 0, y: 20 });
 
             ScrollTrigger.create({
                 trigger: "#conf-icon",
@@ -173,13 +210,27 @@
                                 ease: "power2.out",
                             },
                             "<0.12",
+                        )
+                        .to(
+                            "#conf-per",
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 1.2,
+                                ease: "power2.out",
+                            },
+                            "<0.15",
                         );
                 },
                 onLeaveBack: () => {
                     gsap.set("#conf-flor", { opacity: 0, x: 50 });
                     gsap.set("#conf-icon", { opacity: 0, scale: 0.8 });
-                    gsap.set("#conf-titulo, #conf-btn, #conf-final", { opacity: 0, y: 16 });
+                    gsap.set(
+                        "#conf-titulo, #conf-texto, #conf-btn, #conf-final",
+                        { opacity: 0, y: 16 },
+                    );
                     gsap.set("#conf-linea", { opacity: 0, scaleX: 0.5 });
+                    gsap.set("#conf-per", { opacity: 0, y: 20 });
                 },
             });
         });
