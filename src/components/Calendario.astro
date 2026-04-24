@@ -3,11 +3,11 @@
 ---
 
 <section class="py-6 px-6">
-    <div class="w-56 mx-auto text-center">
+    <div class="w-72 mx-auto text-center">
 
         <!-- Título del mes -->
         <div class="mb-4" id="titulo-mes-container">
-            <h3 class="font-charm text-xl text-[#C9A94B]" id="nombre-mes"></h3>
+            <h3 class="font-charm text-2xl text-[#C9A94B]" id="nombre-mes"></h3>
             <div class="flex items-center gap-2 mt-2">
                 <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
                 <div class="w-1 h-1 rounded-full bg-[#C9A94B] opacity-40"></div>
@@ -60,10 +60,10 @@
                 div.className = "dia-calendario aspect-square flex items-center justify-center rounded-xl";
                 div.id = "dia-especial";
                 div.style.cssText = "background: rgba(201,169,75,0.15); border: 1.5px solid rgba(201,169,75,0.5);";
-                div.innerHTML = `<span class="font-cormorant text-sm font-semibold text-[#C9A94B]">${dia}</span>`;
+                div.innerHTML = `<span class="font-crimson text-sm font-semibold text-[#C9A94B]">${dia}</span>`;
             } else {
                 div.className = "dia-calendario aspect-square flex items-center justify-center";
-                div.innerHTML = `<span class="font-cormorant text-sm text-gray-400 font-light">${dia}</span>`;
+                div.innerHTML = `<span class="font-crimson text-sm font-light" style="color:#C9A94B;">${dia}</span>`;
             }
             container.appendChild(div);
         }

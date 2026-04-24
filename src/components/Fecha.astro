@@ -18,7 +18,7 @@
             <p
                 class="font-crimson uppercase text-[#C9A94B] text-lg sm:text-xl tracking-widest leading-tight"
             >
-                Te invito a celebrar el día
+                Te invito a celebrar este día tan especial en mi vida
             </p>
         </div>
 
@@ -118,12 +118,20 @@
                 start: "top 88%",
                 onEnter: () => {
                     const tl = gsap.timeline();
-                    tl.to("#texto-invitacion", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
-                      .to("#fecha-evento",     { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" }, "<0.1");
+                    tl.to("#texto-invitacion", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power2.out",
+                    }).to(
+                        "#fecha-evento",
+                        { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" },
+                        "<0.1",
+                    );
                 },
                 onLeaveBack: () => {
                     gsap.set("#texto-invitacion", { opacity: 0, y: 15 });
-                    gsap.set("#fecha-evento",     { opacity: 0, y: 15 });
+                    gsap.set("#fecha-evento", { opacity: 0, y: 15 });
                 },
             });
         });

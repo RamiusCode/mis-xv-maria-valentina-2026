@@ -1,20 +1,35 @@
-<section class="relative w-full flex flex-col items-center overflow-hidden py-10 px-8">
-
-    <img id="vest-flor" src="/imagenes/florizquierdo.png" alt=""
-        class="absolute -left-8 top-0 w-24 sm:w-28 h-auto object-contain pointer-events-none select-none" />
+<section
+    class="relative w-full flex flex-col items-center overflow-hidden py-10 px-8"
+>
+    <img
+        id="vest-flor"
+        src="/imagenes/florizquierdo.png"
+        alt=""
+        class="absolute -left-8 top-0 w-24 sm:w-28 h-auto object-contain pointer-events-none select-none"
+    />
 
     <div class="w-full flex flex-col items-center text-center gap-4 z-10">
-        <p id="vest-titulo" class="font-great-vibes text-3xl sm:text-4xl text-[#C9A94B] leading-tight">
+        <p
+            id="vest-titulo"
+            class="font-great-vibes text-3xl sm:text-4xl text-[#C9A94B] leading-tight"
+        >
             Código de vestimenta
         </p>
 
-        <p id="vest-etiqueta" class="font-crimson uppercase tracking-[0.35em] text-[#e8a0b0] text-lg sm:text-base">
+        <p
+            id="vest-etiqueta"
+            class="font-crimson uppercase tracking-[0.35em] text-[#e8a0b0] text-lg sm:text-base"
+        >
             Formal
         </p>
 
-        <img id="vest-img" src="/imagenes/Vestimenta.png" alt="Código de vestimenta"
+        <img
+            id="vest-img"
+            src="/imagenes/Vestimenta.png"
+            alt="Código de vestimenta"
             class="w-28 sm:w-32 h-auto object-contain my-1"
-            style="filter: brightness(0) saturate(100%) invert(70%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(95%);" />
+            style="filter: brightness(0) saturate(100%) invert(70%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(95%);"
+        />
 
         <div id="vest-linea" class="flex items-center gap-2 w-full max-w-xs">
             <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
@@ -22,9 +37,12 @@
             <div class="flex-1 h-px bg-[#C9A94B] opacity-30"></div>
         </div>
 
-        <p id="vest-texto" class="font-crimson uppercase text-[#e8a0b0] text-base sm:text-sm tracking-widest leading-relaxed max-w-xs">
-            Con mucho cariño, les pedimos evitar el tono rosa pastel, ya que
-            está reservado especialmente para la quinceañera.
+        <p
+            id="vest-texto"
+            class="font-crimson uppercase text-[#e8a0b0] text-base sm:text-sm tracking-widest leading-relaxed max-w-xs"
+        >
+            Con mucho cariño, les pedimos evitar el tono dorado, ya que está
+            reservado especialmente para la quinceañera.
         </p>
     </div>
 </section>
@@ -35,30 +53,83 @@
     gsap.registerPlugin(ScrollTrigger);
     if (typeof window !== "undefined") {
         document.addEventListener("DOMContentLoaded", () => {
-            gsap.set("#vest-flor",     { opacity: 0, x: -50 });
-            gsap.set("#vest-titulo",   { opacity: 0, y: 20 });
+            gsap.set("#vest-flor", { opacity: 0, x: -50 });
+            gsap.set("#vest-titulo", { opacity: 0, y: 20 });
             gsap.set("#vest-etiqueta", { opacity: 0, y: 16 });
-            gsap.set("#vest-img",      { opacity: 0, scale: 0.85 });
-            gsap.set("#vest-linea",    { opacity: 0, scaleX: 0.5 });
-            gsap.set("#vest-texto",    { opacity: 0, y: 16 });
+            gsap.set("#vest-img", { opacity: 0, scale: 0.85 });
+            gsap.set("#vest-linea", { opacity: 0, scaleX: 0.5 });
+            gsap.set("#vest-texto", { opacity: 0, y: 16 });
 
             ScrollTrigger.create({
                 trigger: "#vest-titulo",
                 start: "top 88%",
                 onEnter: () => {
                     const tl = gsap.timeline();
-                    tl.to("#vest-flor",     { opacity: 1, x: 0, duration: 1.3, ease: "power2.out" })
-                      .to("#vest-titulo",   { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" }, "<")
-                      .to("#vest-etiqueta", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "<0.12")
-                      .to("#vest-img",      { opacity: 1, scale: 1, duration: 1.1, ease: "back.out(1.2)" }, "<0.12")
-                      .to("#vest-linea",    { opacity: 1, scaleX: 1, duration: 1, ease: "power2.out" }, "<0.1")
-                      .to("#vest-texto",    { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "<0.12");
+                    tl.to("#vest-flor", {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1.3,
+                        ease: "power2.out",
+                    })
+                        .to(
+                            "#vest-titulo",
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 1.1,
+                                ease: "power2.out",
+                            },
+                            "<",
+                        )
+                        .to(
+                            "#vest-etiqueta",
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 1,
+                                ease: "power2.out",
+                            },
+                            "<0.12",
+                        )
+                        .to(
+                            "#vest-img",
+                            {
+                                opacity: 1,
+                                scale: 1,
+                                duration: 1.1,
+                                ease: "back.out(1.2)",
+                            },
+                            "<0.12",
+                        )
+                        .to(
+                            "#vest-linea",
+                            {
+                                opacity: 1,
+                                scaleX: 1,
+                                duration: 1,
+                                ease: "power2.out",
+                            },
+                            "<0.1",
+                        )
+                        .to(
+                            "#vest-texto",
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 1,
+                                ease: "power2.out",
+                            },
+                            "<0.12",
+                        );
                 },
                 onLeaveBack: () => {
-                    gsap.set("#vest-flor",     { opacity: 0, x: -50 });
-                    gsap.set("#vest-titulo, #vest-etiqueta, #vest-texto", { opacity: 0, y: 16 });
-                    gsap.set("#vest-img",      { opacity: 0, scale: 0.85 });
-                    gsap.set("#vest-linea",    { opacity: 0, scaleX: 0.5 });
+                    gsap.set("#vest-flor", { opacity: 0, x: -50 });
+                    gsap.set("#vest-titulo, #vest-etiqueta, #vest-texto", {
+                        opacity: 0,
+                        y: 16,
+                    });
+                    gsap.set("#vest-img", { opacity: 0, scale: 0.85 });
+                    gsap.set("#vest-linea", { opacity: 0, scaleX: 0.5 });
                 },
             });
         });
